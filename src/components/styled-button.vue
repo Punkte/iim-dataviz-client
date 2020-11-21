@@ -26,7 +26,7 @@
       </svg>
     </button>
   </router-link>
-  <button v-else class="button">
+  <button v-else class="button" :class="{'button--initial-case': initialCase}">
       <slot
         v-if="$slots.default"
         name="default"
@@ -73,6 +73,11 @@ export default {
       type: [String, Object],
       required: false,
     },
+    initialCase: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   components: {
     RouterLink,
@@ -104,6 +109,10 @@ export default {
 
   &--fill-color {
     fill: $primary;
+  }
+
+  &--initial-case {
+    text-transform: initial;
   }
 
   &__next-arrow {

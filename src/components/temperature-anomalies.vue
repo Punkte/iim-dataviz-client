@@ -7,8 +7,10 @@
         class="page container__vertical-align"
       >
         <div class="page__content">
-          L'influence de l'homme sur le système climatique est claire et croissante.<br/>
-          Si elle n'est pas maîtrisée, le réchauffement climatique augmentera la probabilité d'impacts généralisés et irréversibles sur les populations et les écosystèmes.
+          <div class="temp-content">
+            L'impact de l'homme sur le réchauffement climatique augmente considérablement.<br/><br/>
+            Si cet impact n'est pas maîtrisé, le réchauffement climatique augmentera la probabilité d'impacts généralisés et irréversibles sur les populations et les différents écosystèmes.
+          </div>
         </div>
         <div class="app-container__button" ref="buttonRef">
           <styled-button :next-link="true" @click="visibleContent = false" />
@@ -16,13 +18,16 @@
       </div>
     </transition>
     <transition @before-enter="chartBeforeEnter" @enter="chartEnter" mode="out-in">
-      <template #default>
+      <div>
         <div v-show="!visibleContent" ref="chartContainer" class="container__vertical-align">
           <div class="page container__vertical-align">
             <chart :chartData="chartData" ref="chartRef"/>
           </div>
         </div>
-      </template>
+        <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
+          <styled-button :next-link="true" :to="{ name: 'Pixels' }" />
+        </div>
+      </div>
     </transition>
   </app-container>
 </template>
@@ -101,6 +106,12 @@ export default {
     StyledButton,
     Chart,
   },
+  props: {
+    src: {
+      type: [String, Object],
+      required: false,
+    },
+  },
 };
 
 </script>
@@ -111,6 +122,11 @@ export default {
   width: 100%;
   &__content {
     margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .temp-content {
+    max-width: 500px;
   }
 }
 </style>

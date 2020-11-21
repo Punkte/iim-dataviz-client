@@ -1,29 +1,16 @@
 <template>
-  <div class="home">
-    <input type="number" v-model.number="scaleValue">
-    <eight-bit
-      :src="polarBear"
-      :scale="scaleValue || 5"
-    />
+  <div>
+    <ice-melting ref="comp"/>
   </div>
 </template>
 
 <script>
-import EightBit from '@/components/eight-bit.vue';
-import { ref } from 'vue';
-import polarBear from '@/assets/img/ours-polaire.jpg';
+import IceMelting from '@/components/ice-melting.vue';
 
 export default {
   name: 'Pixels',
   components: {
-    EightBit,
-  },
-  setup() {
-    const scaleValue = ref(5);
-    return {
-      scaleValue,
-      polarBear,
-    };
+    IceMelting,
   },
 };
 </script>
