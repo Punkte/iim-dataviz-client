@@ -12,7 +12,7 @@ export const chartify = (type = 'bar', dataFile) => ({
       {
         label: getDescription(dataFile),
         data: getData(dataFile),
-        backgroundColor: getData(dataFile).map(() => 'rgba(31,44,49, .75)'),
+        backgroundColor: getData(dataFile).map(() => 'rgba(137, 194, 217, .75)'),
       },
     ],
   },
@@ -22,21 +22,21 @@ export const chartify = (type = 'bar', dataFile) => ({
     scaleStartValue: 20,
     legend: {
       labels: {
-        fontColor: '#fff',
+        fontColor: '#013A63',
         fontSize: 18,
       },
     },
     scales: {
       xAxes: [{
         ticks: {
-          fontColor: '#f7f1f8',
+          fontColor: '#013A63',
         },
       }],
       yAxes: [{
         ticks: {
           min: Math.min(...getData(dataFile)) - 0.5,
           max: Math.max(...getData(dataFile)) + 0.5,
-          fontColor: '#f7f1f8',
+          fontColor: '#013A63',
           beginAtZero: true,
           padding: 25,
         },
