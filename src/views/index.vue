@@ -1,29 +1,28 @@
 <template>
-  <div class="home">
-    <input type="number" v-model.number="scaleValue">
-    <eight-bit
-      :src="polarBear"
-      :scale="scaleValue || 5"
-    />
-  </div>
+  <app-container>
+    <intro ref="comp"/>
+  </app-container>
 </template>
 
 <script>
-import EightBit from '@/components/eight-bit.vue';
+import AppContainer from '@/components/app-container.vue';
+import Intro from '@/components/intro.vue';
 import { ref } from 'vue';
-import polarBear from '@/assets/img/ours-polaire.jpg';
 
 export default {
-  name: 'Home',
   components: {
-    EightBit,
+    AppContainer,
+    Intro,
   },
   setup() {
-    const scaleValue = ref(5);
+    const comp = ref();
     return {
-      scaleValue,
-      polarBear,
+      comp,
     };
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+</style>
