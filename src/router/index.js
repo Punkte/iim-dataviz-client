@@ -15,8 +15,8 @@ const routes = [
     component: Temperatures,
   },
   {
-    path: '/pixels',
-    name: 'Pixels',
+    path: '/ice-melting',
+    name: 'IceMelting',
     component: Pixels,
   },
 ];

@@ -2,7 +2,7 @@
   <app-container>
     <transition @leave="contentLeave">
       <div
-        v-show="visibleContent"
+        v-if="visibleContent"
         ref="contentRef"
         class="page container__vertical-align"
       >
@@ -18,14 +18,14 @@
       </div>
     </transition>
     <transition @before-enter="chartBeforeEnter" @enter="chartEnter" mode="out-in">
-      <div>
-        <div v-show="!visibleContent" ref="chartContainer" class="container__vertical-align">
+      <div v-show="!visibleContent">
+        <div ref="chartContainer" class="container__vertical-align">
           <div class="page container__vertical-align">
             <chart :chartData="chartData" ref="chartRef"/>
           </div>
         </div>
         <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
-          <styled-button :next-link="true" :to="{ name: 'Pixels' }" />
+          <styled-button :next-link="true" :to="{ name: 'IceMelting' }" />
         </div>
       </div>
     </transition>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { TimelineLite, TweenMax } from 'gsap';
+import { TimelineLite } from 'gsap';
 import { ref } from 'vue';
 import chartData from '@/data/temperatures/index';
 import AppContainer from './app-container.vue';
@@ -60,22 +60,29 @@ export default {
     };
 
     const contentLeave = (el, done) => {
-      TweenMax.to(el, 0.5, {
+      const tl = new TimelineLite();
+      tl.to(el, {
         opacity: 0,
+        scale: 0.9,
+        duration: 0.5,
         onComplete: done,
       });
     };
     const chartBeforeEnter = () => {
-      TweenMax.set(chartContainer.value, {
+      const tl = new TimelineLite();
+      tl.set(chartContainer.value, {
         opacity: 0,
+        scale: 0.9,
       });
       initialChartValues.value = chartRef.value.chartInstance.data.datasets[0].data;
       chartRef.value.chartInstance.data.datasets[0].data = chartRef.value.chartInstance.data.datasets[0].data.map(() => 0);
     };
     const chartEnter = (el, done) => {
-      TweenMax.to(chartContainer.value, 1, {
+      const tl = new TimelineLite();
+      tl.to(chartContainer.value, {
         opacity: 1,
-        duration: 5,
+        scale: 1,
+        duration: 1,
         onComplete() {
           chartRef.value.chartInstance.data.datasets[0].data = initialChartValues.value;
           chartRef.value.chartInstance.update();
