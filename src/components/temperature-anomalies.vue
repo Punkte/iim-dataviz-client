@@ -37,9 +37,9 @@
               </p>
             </div>
           </div>
-        </div>
-        <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
-          <styled-button :next-link="true" :to="{ name: 'IceMelting' }" />
+          <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
+            <styled-button :next-link="true" :to="{ name: 'IceMelting' }" />
+          </div>
         </div>
       </div>
     </transition>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Index from '@/views/index.vue';
 import Temperatures from '@/views/temperatures.vue';
 import Pixels from '@/views/pixels.vue';
+import JoinUs from '@/views/join-us.vue';
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/ice-melting',
     name: 'IceMelting',
     component: Pixels,
+  },
+  {
+    path: '/join-us',
+    name: 'JoinUs',
+    component: JoinUs,
   },
 ];
 
