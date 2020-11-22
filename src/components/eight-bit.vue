@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss">
 .bit-container {
-  width: 500px;
+  max-width: 500px;
   height: 500px;
 
   canvas {

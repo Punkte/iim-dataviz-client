@@ -16,7 +16,7 @@
     </div>
     <div ref="buttonRef" class="app-container__button">
       <styled-button
-        to="/temperatures"
+        :to="{name: 'Temperatures'}"
         next-link
       />
     </div>

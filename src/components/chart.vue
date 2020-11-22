@@ -27,12 +27,12 @@ export default {
 <style lang="scss">
 .chart {
   position: relative;
-  height: 500px;
+  min-height: 500px;
   width: 100%;
   max-width: 1280px;
 
   @include md {
-    height: 350px;
+    min-height: 150px;
   }
 }
 </style>

@@ -16,7 +16,14 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    flex-direction: column;
     /* min-height */
+  }
+
+  .text-container {
+    max-width: 980px;
+    margin: 16px auto;
+    margin-bottom: 32px;
   }
 
   @include xl {
@@ -31,6 +38,9 @@
     @include md {
       position: initial;
       right: 0;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 32px;
     }
 
     @include xl {

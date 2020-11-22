@@ -2,13 +2,15 @@
   <app-container>
     <transition @leave="contentLeave">
       <div
-        v-show="visibleContent"
+        v-if="visibleContent"
         ref="contentRef"
-        class="page container__vertical-align"
+        class="page container__vertical-align temperature-anomalies"
       >
         <div class="page__content">
-          L'influence de l'homme sur le système climatique est claire et croissante.<br/>
-          Si elle n'est pas maîtrisée, le réchauffement climatique augmentera la probabilité d'impacts généralisés et irréversibles sur les populations et les écosystèmes.
+          <div class="temp-content">
+            L'impact de l'homme sur le réchauffement climatique augmente considérablement.<br/><br/>
+            Si cet impact n'est pas maîtrisé, le réchauffement climatique augmentera la probabilité d'impacts généralisés et irréversibles sur les populations et les différents écosystèmes.
+          </div>
         </div>
         <div class="app-container__button" ref="buttonRef">
           <styled-button :next-link="true" @click="visibleContent = false" />
@@ -16,19 +18,36 @@
       </div>
     </transition>
     <transition @before-enter="chartBeforeEnter" @enter="chartEnter" mode="out-in">
-      <template #default>
-        <div v-show="!visibleContent" ref="chartContainer" class="container__vertical-align">
-          <div class="page container__vertical-align">
+      <div v-show="!visibleContent">
+        <div ref="chartContainer" class="container__vertical-align">
+          <div class="page container__vertical-align temperature-anomalies">
             <chart :chartData="chartData" ref="chartRef"/>
+            <div class="text-container">
+              <h3>Les causes</h3>
+              <p>
+              Le réchauffement climatique est dû à un phénomène appelé l'effet de serre et plus particulièrement aux gaz&nbsp;à&nbsp;effet&nbsp;de&nbsp;serre.<br>
+              Il existe plusieurs gaz à effet de serre dont le dioxyde de carbone et ils ont tendance à augmenter depuis de nombreuses années.
+              <br>
+              <br>
+              Les gaz à effet de serre sont rejetés d'une part par les activités humaines (industrie, transport, agriculture, …) et d'autre part par des phénomènes naturels (volcans, soleil, pergélisol...) et ont pour rôle de piéger la chaleur dans l'atmosphère.
+              </p>
+              <h3>Les conséquences</h3>
+              <p>
+              Le réchauffement climatique ne cesse de se poursuive et entraîne de nombreuses conséquences sur l'environnement (dérèglement du climat, affectation des populations et perturbation de l'économie).
+              </p>
+            </div>
+          </div>
+          <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
+            <styled-button :next-link="true" :to="{ name: 'IceMelting' }" />
           </div>
         </div>
-      </template>
+      </div>
     </transition>
   </app-container>
 </template>
 
 <script>
-import { TimelineLite, TweenMax } from 'gsap';
+import { TimelineLite } from 'gsap';
 import { ref } from 'vue';
 import chartData from '@/data/temperatures/index';
 import AppContainer from './app-container.vue';
@@ -55,22 +74,29 @@ export default {
     };
 
     const contentLeave = (el, done) => {
-      TweenMax.to(el, 0.5, {
+      const tl = new TimelineLite();
+      tl.to(el, {
         opacity: 0,
+        scale: 0.9,
+        duration: 0.5,
         onComplete: done,
       });
     };
     const chartBeforeEnter = () => {
-      TweenMax.set(chartContainer.value, {
+      const tl = new TimelineLite();
+      tl.set(chartContainer.value, {
         opacity: 0,
+        scale: 0.9,
       });
       initialChartValues.value = chartRef.value.chartInstance.data.datasets[0].data;
       chartRef.value.chartInstance.data.datasets[0].data = chartRef.value.chartInstance.data.datasets[0].data.map(() => 0);
     };
     const chartEnter = (el, done) => {
-      TweenMax.to(chartContainer.value, 1, {
+      const tl = new TimelineLite();
+      tl.to(chartContainer.value, {
         opacity: 1,
-        duration: 5,
+        scale: 1,
+        duration: 1,
         onComplete() {
           chartRef.value.chartInstance.data.datasets[0].data = initialChartValues.value;
           chartRef.value.chartInstance.update();
@@ -101,6 +127,12 @@ export default {
     StyledButton,
     Chart,
   },
+  props: {
+    src: {
+      type: [String, Object],
+      required: false,
+    },
+  },
 };
 
 </script>
@@ -111,6 +143,19 @@ export default {
   width: 100%;
   &__content {
     margin-bottom: 16px;
+    width: 100%;
+  }
+
+  .temp-content {
+    max-width: 500px;
+  }
+
+  &.temperature-anomalies {
+    @include md {
+      .app-container__button {
+        bottom: 16px;
+      }
+    }
   }
 }
 </style>
