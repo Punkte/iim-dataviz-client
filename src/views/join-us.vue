@@ -8,7 +8,7 @@
         <p>
           Pour avoir plus d’informations sur ces enjeux et comment les éviter, n’hésitez pas à nous suivre sur Instagram
         </p>
-        <a href="https://instagram.com/panpan_94" target="_blank">
+        <a href="https://instagram.com/plus_2_degres" target="_blank">
           <img :src="instagramLogo" class="join-us__logo"/>
         </a>
       </div>
