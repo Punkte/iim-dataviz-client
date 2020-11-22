@@ -1,10 +1,10 @@
-<template>
+q<template>
  <transition
   @before-enter="beforeEnterLoad"
   @enter="enterLoad"
   @leave="leaveLoad"
   mode="out-in">
-    <pixel-loader v-show="!canShow" @load="pixelLoaded"/>
+    <pixel-loader :src="src" v-show="!canShow" @load="pixelLoaded"/>
   </transition>
   <transition
     @before-enter="beforeEnterLoad"
@@ -17,7 +17,9 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import {
+  onMounted, onUnmounted, ref, watch,
+} from 'vue';
 import { TimelineLite } from 'gsap';
 import { beforeEnterScale, enterScalein, leaveScaleOut } from '@/utils/transitions';
 import PixelLoader from './pixel-loader.vue';
@@ -29,6 +31,19 @@ export default {
 
     onMounted(() => {
       canShow.value = false;
+    });
+
+    onUnmounted(() => {
+      document.body.style.overflow = null;
+    });
+
+    watch(canShow, (v) => {
+      if (v) {
+        document.body.style.overflow = null;
+      } else {
+        window.scrollTo(0, 0);
+        document.body.style.overflow = 'hidden';
+      }
     });
 
     const beforeEnterLoad = beforeEnterScale(tl);
@@ -49,6 +64,11 @@ export default {
   },
   components: {
     PixelLoader,
+  },
+  props: {
+    src: {
+      type: [String, Object],
+    },
   },
 };
 </script>

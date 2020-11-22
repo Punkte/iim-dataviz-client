@@ -4,7 +4,7 @@
       <div
         v-if="visibleContent"
         ref="contentRef"
-        class="page container__vertical-align"
+        class="page container__vertical-align temperature-anomalies"
       >
         <div class="page__content">
           <div class="temp-content">
@@ -20,7 +20,7 @@
     <transition @before-enter="chartBeforeEnter" @enter="chartEnter" mode="out-in">
       <div v-show="!visibleContent">
         <div ref="chartContainer" class="container__vertical-align">
-          <div class="page container__vertical-align">
+          <div class="page container__vertical-align temperature-anomalies">
             <chart :chartData="chartData" ref="chartRef"/>
             <div class="text-container">
               <h3>Les causes</h3>
@@ -148,6 +148,14 @@ export default {
 
   .temp-content {
     max-width: 500px;
+  }
+
+  &.temperature-anomalies {
+    @include md {
+      .app-container__button {
+        bottom: 16px;
+      }
+    }
   }
 }
 </style>
