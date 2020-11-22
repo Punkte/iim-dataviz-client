@@ -19,6 +19,11 @@
     /* min-height */
   }
 
+  .text-container {
+    max-width: 980px;
+    margin-left: 16px auto;
+  }
+
   @include xl {
     padding: 0 16px;
   }

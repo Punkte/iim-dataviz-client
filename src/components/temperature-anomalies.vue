@@ -22,6 +22,20 @@
         <div ref="chartContainer" class="container__vertical-align">
           <div class="page container__vertical-align">
             <chart :chartData="chartData" ref="chartRef"/>
+            <div class="text-container">
+              <h3>Les causes</h3>
+              <p>
+              Le réchauffement climatique est dû à un phénomène appelé l'effet de serre et plus particulièrement aux gaz&nbsp;à&nbsp;effet&nbsp;de&nbsp;serre.<br>
+              Il existe plusieurs gaz à effet de serre dont le dioxyde de carbone et ils ont tendance à augmenter depuis de nombreuses années.
+              <br>
+              <br>
+              Les gaz à effet de serre sont rejetés d'une part par les activités humaines (industrie, transport, agriculture, …) et d'autre part par des phénomènes naturels (volcans, soleil, pergélisol...) et ont pour rôle de piéger la chaleur dans l'atmosphère.
+              </p>
+              <h3>Les conséquences</h3>
+              <p>
+              Le réchauffement climatique ne cesse de se poursuive et entraîne de nombreuses conséquences sur l'environnement (dérèglement du climat, affectation des populations et perturbation de l'économie).
+              </p>
+            </div>
           </div>
         </div>
         <div v-if="!visibleContent" class="app-container__button" ref="buttonRef">
