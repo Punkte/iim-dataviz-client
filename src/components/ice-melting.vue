@@ -1,6 +1,6 @@
 <template>
   <app-container>
-    <loader>
+    <loader :src="penguin">
       <div class="page container__vertical-align">
         <chart :chart-data="chartData" ref="chartRef"/>
         <div class="text-container">
@@ -27,6 +27,7 @@
 
 <script>
 import chartData from '@/data/ice-melting/index';
+import penguin from '@/assets/img/penguin.jpg';
 import AppContainer from './app-container.vue';
 import Chart from './chart.vue';
 import Loader from './loader.vue';
@@ -42,6 +43,7 @@ export default {
   setup() {
     return {
       chartData,
+      penguin,
     };
   },
 };
