@@ -3,7 +3,7 @@
     <div class="page container__vertical-align">
       <h1>{{ currentYear }}</h1>
       <eight-bit
-        :src="polarBear"
+        :src="src"
         :scale="scaleValue || 5"
       />
     </div>
@@ -23,7 +23,7 @@ export default {
     const maxYear = new Date().getFullYear();
     const currentYear = ref(minYear);
 
-    const scaleValue = computed(() => currentYear.value - (minYear - 1));
+    const scaleValue = computed(() => (currentYear.value !== maxYear ? currentYear.value - (minYear - 1) : 100));
 
     onMounted(() => {
       gsap.to(currentYear, 3, {
@@ -33,7 +33,7 @@ export default {
         onComplete() {
           setTimeout(() => {
             emit('load');
-          }, 300);
+          }, 500);
         },
       });
     });
